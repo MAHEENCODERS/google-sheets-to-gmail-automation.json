@@ -1,0 +1,305 @@
+{
+  "name": "NEW SHEET TRIGGER",
+  "nodes": [
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyMinute"
+            }
+          ]
+        },
+        "documentId": {
+          "__rl": true,
+          "value": "1yitD4OoL5ggajy6JYx82xWLj-n4cd1y0JmQzIb6qCzs",
+          "mode": "list",
+          "cachedResultName": "NEW REGISTRATION",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1yitD4OoL5ggajy6JYx82xWLj-n4cd1y0JmQzIb6qCzs/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 745060940,
+          "mode": "list",
+          "cachedResultName": "Form Responses 1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1yitD4OoL5ggajy6JYx82xWLj-n4cd1y0JmQzIb6qCzs/edit#gid=745060940"
+        },
+        "event": "rowAdded",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheetsTrigger",
+      "typeVersion": 1,
+      "position": [
+        -384,
+        -208
+      ],
+      "id": "aba014f2-1ce3-4f86-b577-4d3d65be307d",
+      "name": "Google Sheets Trigger",
+      "credentials": {
+        "googleSheetsTriggerOAuth2Api": {
+          "id": "dauB5GYbuqrNypbb",
+          "name": "Google Sheets Trigger account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "bbc8a6d1-dcfb-48d1-a0f9-1ac7e3cb00aa",
+              "leftValue": "={{ $json['EMAIL SENT'] }}",
+              "rightValue": "No",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        -16,
+        -192
+      ],
+      "id": "501c60b3-e8eb-4b2c-90b0-a54a769f2c48",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $('Google Sheets Trigger').item.json.email }}",
+        "subject": "=Welcome, {{ $('Google Sheets Trigger').item.json.Name }}",
+        "message": "Welcome to 🎓SHAHJEE E ACADEMY  Online Learning Platform Registration Open Session 2026-27 IX - X - XI - XII SCIENCE & COMMERCE ",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        224,
+        -192
+      ],
+      "id": "1a84a32b-28fa-4863-be60-06b80c4a3cac",
+      "name": "Send a message",
+      "webhookId": "416f6abf-9a20-44ef-a93f-744ff7d87fe7",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "f6zzw1qt8myoKs2S",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "1yitD4OoL5ggajy6JYx82xWLj-n4cd1y0JmQzIb6qCzs",
+          "mode": "list",
+          "cachedResultName": "NEW REGISTRATION",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1yitD4OoL5ggajy6JYx82xWLj-n4cd1y0JmQzIb6qCzs/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 745060940,
+          "mode": "list",
+          "cachedResultName": "Form Responses 1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1yitD4OoL5ggajy6JYx82xWLj-n4cd1y0JmQzIb6qCzs/edit#gid=745060940"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "EMAIL SENT": "No",
+            "row_number": "={{ $('Get row(s) in sheet').item.json.row_number }}"
+          },
+          "matchingColumns": [
+            "row_number"
+          ],
+          "schema": [
+            {
+              "id": "Timestamp",
+              "displayName": "Timestamp",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Name",
+              "displayName": "Name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Number",
+              "displayName": "Number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "email",
+              "displayName": "email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "EMAIL SENT",
+              "displayName": "EMAIL SENT",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        432,
+        -192
+      ],
+      "id": "e42d2e58-c25f-4a5d-ac41-8abfa7d86d32",
+      "name": "Update row in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "Ct4APn59LbDgIhxE",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1yitD4OoL5ggajy6JYx82xWLj-n4cd1y0JmQzIb6qCzs",
+          "mode": "list",
+          "cachedResultName": "NEW REGISTRATION",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1yitD4OoL5ggajy6JYx82xWLj-n4cd1y0JmQzIb6qCzs/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 745060940,
+          "mode": "list",
+          "cachedResultName": "Form Responses 1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1yitD4OoL5ggajy6JYx82xWLj-n4cd1y0JmQzIb6qCzs/edit#gid=745060940"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -192,
+        -208
+      ],
+      "id": "945282e6-d209-4afe-81ea-103d140bb2b3",
+      "name": "Get row(s) in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "Ct4APn59LbDgIhxE",
+          "name": "Google Sheets account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Google Sheets Trigger": {
+      "main": [
+        [
+          {
+            "node": "Get row(s) in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [],
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send a message": {
+      "main": [
+        [
+          {
+            "node": "Update row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get row(s) in sheet": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "0c159ff2-b0d7-4d61-8530-6436f0176e18",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "132ed9b0d8bc5785234750261e64f10fd01e3aa183be7ba76230281003adddcc"
+  },
+  "nodeGroups": [],
+  "id": "Wou0LnfsDy5FhUg2",
+  "tags": []
+}
