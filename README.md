@@ -1,0 +1,1 @@
+# google-sheets-to-gmail-automation.json
